@@ -28,42 +28,42 @@ ci: ci-macos ci-ios ci-swiftpm
 
 ci-macos:
 	@echo "Building macOS framework and running tests..."
-	$(XCODECI) -scheme OCMock -destination 'platform=macOS' test | xcpretty -c
+	$(XCODECI) -scheme OCMock -destination 'platform=macOS' test
 
 ci-ios:
 	@echo "Building iOS library and running tests..."
-	$(XCODECI) -scheme OCMockLib -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' test | xcpretty -c
+	$(XCODECI) -scheme OCMockLib -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' test
 
 
 dist: archives xcframework sourcecode dmg
 
 macos:
 	@echo "** Building macOS framework..."
-	$(XCODEDIST) archive -scheme OCMock -destination 'generic/platform=macOS' -archivePath $(ARCHIVE_DIR)/OCMock-macOS | xcpretty -c
+	$(XCODEDIST) archive -scheme OCMock -destination 'generic/platform=macOS' -archivePath $(ARCHIVE_DIR)/OCMock-macOS
 
 ioslib:
 	@echo "** Building iOS libraries..."
-	$(XCODEDIST) archive -scheme OCMockLib -destination 'generic/platform=iOS' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-lib | xcpretty -c
-	$(XCODEDIST) archive -scheme OCMockLib -destination 'generic/platform=iOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-lib-sim | xcpretty -c
+	$(XCODEDIST) archive -scheme OCMockLib -destination 'generic/platform=iOS' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-lib
+	$(XCODEDIST) archive -scheme OCMockLib -destination 'generic/platform=iOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-lib-sim
 
 ios:
 	@echo "** Building iOS frameworks..."
-	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=iOS' -archivePath $(ARCHIVE_DIR)/OCMock-iOS | xcpretty -c
-	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=iOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-sim | xcpretty -c
+	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=iOS' -archivePath $(ARCHIVE_DIR)/OCMock-iOS
+	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=iOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-iOS-sim
 
 catalyst:
 	@echo "** Building Mac Catalyst framework..."
-	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=macOS,variant=Mac Catalyst' -archivePath $(ARCHIVE_DIR)/OCMock-catalyst | xcpretty -c
+	$(XCODEDIST) archive -scheme "OCMock iOS" -destination 'generic/platform=macOS,variant=Mac Catalyst' -archivePath $(ARCHIVE_DIR)/OCMock-catalyst
 
 tvos:
 	@echo "** Building tvOS frameworks..."
-	$(XCODEDIST) archive -scheme "OCMock tvOS" -destination 'generic/platform=tvOS' -archivePath $(ARCHIVE_DIR)/OCMock-tvOS | xcpretty -c
-	$(XCODEDIST) archive -scheme "OCMock tvOS" -destination 'generic/platform=tvOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-tvOS-sim | xcpretty -c
+	$(XCODEDIST) archive -scheme "OCMock tvOS" -destination 'generic/platform=tvOS' -archivePath $(ARCHIVE_DIR)/OCMock-tvOS
+	$(XCODEDIST) archive -scheme "OCMock tvOS" -destination 'generic/platform=tvOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-tvOS-sim
 
 watchos:
 	@echo "** Building watchOS frameworks..."
-	$(XCODEDIST) archive -scheme "OCMock watchOS" -destination 'generic/platform=watchOS' -archivePath $(ARCHIVE_DIR)/OCMock-watchOS | xcpretty -c
-	$(XCODEDIST) archive -scheme "OCMock watchOS" -destination 'generic/platform=watchOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-watchOS-sim | xcpretty -c
+	$(XCODEDIST) archive -scheme "OCMock watchOS" -destination 'generic/platform=watchOS' -archivePath $(ARCHIVE_DIR)/OCMock-watchOS 
+	$(XCODEDIST) archive -scheme "OCMock watchOS" -destination 'generic/platform=watchOS Simulator' -archivePath $(ARCHIVE_DIR)/OCMock-watchOS-sim
 
 buildcheck:
 	@echo "** Verifying archives..."
